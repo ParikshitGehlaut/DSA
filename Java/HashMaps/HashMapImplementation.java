@@ -97,20 +97,64 @@ public class HashMapImplementation {
     public static void main(String[] args) {
         MyHashMap<String, Integer> mp = new MyHashMap<>();
 
+        // Test case 1: Insert a few elements and check the size
         mp.put("a", 1);
         mp.put("b", 2);
         mp.put("c", 3);
-        System.out.println("Testing size: " + mp.size()); // 3
-        System.out.println("Testing get: " + mp.get("b")); // 2
-        System.out.println("Testing get: " + mp.get("college")); // null
-        System.out.println("Testing remove " + mp.remove("c")); // 3
-        System.out.println("Testing size: " + mp.size()); // 2
+        assert mp.size() == 3 : "Test case 1 failed";
 
-        // updating c value to 30
-        mp.put("c", 30);
-        System.out.println("Testing get: " + mp.get("a")); // 2
-        System.out.println("Testing get: " + mp.get("b")); // 2
-        System.out.println("Testing get: " + mp.get("c")); // 2
+        // Test case 2: Get the value of an existing key
+        assert mp.get("b") == 2 : "Test case 2 failed";
+
+        // Test case 3: Get the value of a non-existing key
+        assert mp.get("college") == null : "Test case 3 failed";
+
+        // Test case 4: Remove an existing key and check size
+        assert mp.remove("c") == 3 : "Test case 4 failed";
+        assert mp.size() == 2 : "Test case 4 failed";
+
+        // Test case 5: Remove a non-existing key
+        assert mp.remove("c") == null : "Test case 5 failed";
+
+        // Test case 6: Insert a key with an existing value (update the value)
+        mp.put("b", 20);
+        assert mp.get("b") == 20 : "Test case 6 failed";
+
+        // Test case 7: Insert a key again and ensure it's updated
+        mp.put("a", 10);
+        assert mp.get("a") == 10 : "Test case 7 failed";
+
+        // Test case 8: Check the size after updates
+        assert mp.size() == 2 : "Test case 8 failed";
+
+        // Test case 9: Remove all elements and check size
+        assert mp.remove("a") == 10 : "Test case 9 failed";
+        assert mp.remove("b") == 20 : "Test case 9 failed";
+        assert mp.size() == 0 : "Test case 9 failed";
+
+        // Test case 10: Get from an empty map
+        assert mp.get("a") == null : "Test case 10 failed";
+        assert mp.get("b") == null : "Test case 10 failed";
+
+        // Test case 11: Insert and remove in a larger set of operations
+        mp.put("x", 100);
+        mp.put("y", 200);
+        mp.put("z", 300);
+        assert mp.size() == 3 : "Test case 11 failed";
+        assert mp.remove("y") == 200 : "Test case 11 failed";
+        assert mp.get("z") == 300 : "Test case 11 failed";
+        assert mp.get("x") == 100 : "Test case 11 failed";
+        assert mp.size() == 2 : "Test case 11 failed";
+
+        // Test case 12: Handling null values
+        MyHashMap<String, String> nullMap = new MyHashMap<>();
+        nullMap.put("nullValue", null);
+        assert nullMap.get("nullValue") == null : "Test case 12 failed";
+        nullMap.put("nullValue", "notNull");
+        assert "notNull".equals(nullMap.get("nullValue")) : "Test case 12 failed";
+        assert nullMap.size() == 1 : "Test case 12 failed";
+
+        System.out.println("All test cases passed!");
 
     }
 }
