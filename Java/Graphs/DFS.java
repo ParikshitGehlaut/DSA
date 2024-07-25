@@ -41,7 +41,7 @@ public class DFS {
         graph[6].add(new Edge(6, 5));
     }
 
-    public static void bfs(ArrayList<Edge> graph[], int V) {
+    public static void dfs(ArrayList<Edge> graph[], int V) {
         Stack<Integer> s = new Stack<>();
         boolean vis[] = new boolean[V];
         s.push(0);
@@ -64,7 +64,7 @@ public class DFS {
         ArrayList<Edge> graph[] = new ArrayList[V];
 
         createGraph(graph);
-        bfs(graph, V);
+        dfs(graph, V);
         System.out.println();
     }
 }

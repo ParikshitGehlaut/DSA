@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Stack;
 
-public class BFS {
+public class AllPath {
     public static class Edge {
         int src;
         int dest;
@@ -42,21 +41,19 @@ public class BFS {
         graph[6].add(new Edge(6, 5));
     }
 
-    // O(V + E)
-    public static void bfs(ArrayList<Edge> graph[], int V) {
-        Queue<Integer> q = new LinkedList<>();
+    // O(V * V)
+    public static void printAllPath(ArrayList<Edge> graph[], boolean vis[], int curr, String path, int tar) {
+        if (curr == tar) {
+            System.out.println(path);
+            return;
+        }
 
-        boolean vis[] = new boolean[V];
-        q.add(3);
-        while (!q.isEmpty()) {
-            int curr = q.remove();
-            if (vis[curr] != true) {
-                System.out.print(curr + " ");
+        for (int i = 0; i < graph[curr].size(); i++) {
+            Edge e = graph[curr].get(i);
+            if (!vis[e.dest]) {
                 vis[curr] = true;
-                for (int i = 0; i < graph[curr].size(); i++) {
-                    Edge e = graph[curr].get(i);
-                    q.add(e.dest);
-                }
+                printAllPath(graph, vis, e.dest, path + e.dest, tar);
+                vis[curr] = false;
             }
         }
     }
@@ -64,9 +61,9 @@ public class BFS {
     public static void main(String args[]) {
         int V = 7; // number of vertexes
         ArrayList<Edge> graph[] = new ArrayList[V];
-
+        boolean vis[] = new boolean[V];
         createGraph(graph);
-        bfs(graph, V);
-        System.out.println();
+        int src = 0, tar = 5;
+        printAllPath(graph, vis, src, "0", tar);
     }
 }
