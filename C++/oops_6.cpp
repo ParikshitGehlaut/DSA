@@ -28,7 +28,7 @@ public:
 
 int main()
 {
-    Complex c1;
+    Complex c1; // This will invoke the constructor
     c1.printNumber();
 
     Complex c2 = c1; // This will invoke the copy constructor
